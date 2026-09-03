@@ -714,6 +714,46 @@ model add deepseek/deepseek-chat \
   --price-cache-hit 0.07
 ```
 
+[aimlapi.com](https://aimlapi.com) is an OpenAI-compatible inference gateway
+that puts GPT, Claude, Gemini, DeepSeek, GLM and other catalog models behind
+one API key and one bill. Don't forget to set `AIMLAPI_API_KEY` in your
+environment.
+
+```bash
+provider add aimlapi --name "aimlapi.com" --type openai-compat \
+  --base-url "https://api.aimlapi.com/v1" \
+  --api-key "$AIMLAPI_API_KEY" \
+  --extra-header HTTP-Referer "https://charm.land" \
+  --extra-header X-Title "Crush" \
+  --extra-header X-AIMLAPI-Partner-ID "part_crush" \
+  --extra-header X-AIMLAPI-Source "agent/crush"
+
+model add aimlapi/openai/gpt-5.6-terra \
+  --name "GPT-5.6 Terra" \
+  --context-window 1050000 \
+  --default-max-tokens 128000 \
+  --can-reason true \
+  --supports-images true \
+  --price-input 2.6 \
+  --price-output 15.6
+```
+
+Any other id from the aimlapi.com [model catalog](https://aimlapi.com/models)
+works the same way — `anthropic/claude-sonnet-5`, `google/gemini-3.8-flash`,
+`deepseek/deepseek-v4-pro`, `z-ai/glm-5.3-flash` and so on. Register each with
+another `model add aimlapi/<id>` line. Note that the model id itself contains a
+slash, so the reference reads `aimlapi/<vendor>/<model>`.
+
+Register models by hand rather than with `--discover-models true`:
+aimlapi.com's `/v1/models` lists its whole catalog, including image, video,
+speech and embedding models, so auto-discovery fills the model picker with
+several hundred entries that cannot serve a chat completion.
+
+The four `--extra-header` lines are optional. They identify Crush as the
+calling application to aimlapi.com; `HTTP-Referer` and `X-Title` follow the
+same convention Crush already sends to OpenRouter and Vercel. Headers set on a
+provider are scoped to that provider, so they are never sent anywhere else.
+
 #### Anthropic-Compatible APIs
 
 Custom Anthropic-compatible providers follow this format:
