@@ -161,13 +161,6 @@ Flags:
       --provider-options JSON       merge a provider-specific JSON object
 ```
 
-```bash
-provider add deepseek \
-  --type openai-compat \
-  --base-url "https://api.deepseek.com/v1" \
-  --api-key "${DEEPSEEK_API_KEY:?set DEEPSEEK_API_KEY}"
-```
-
 [aimlapi.com](https://aimlapi.com) fronts several vendors' models (GPT, Claude,
 Gemini, DeepSeek, GLM and more) behind one OpenAI-compatible API and key:
 
@@ -189,6 +182,13 @@ model add aimlapi/openai/gpt-5.6-terra --name "GPT-5.6 Terra" \
 The model id contains a slash of its own, so the reference is
 `aimlapi/<vendor>/<model>`. See the aimlapi.com
 [model catalog](https://aimlapi.com/models) for the full list of ids.
+
+```bash
+provider add deepseek \
+  --type openai-compat \
+  --base-url "https://api.deepseek.com/v1" \
+  --api-key "${DEEPSEEK_API_KEY:?set DEEPSEEK_API_KEY}"
+```
 
 Headers whose value resolves to the empty string (an unset `$VAR`, a
 `$(...)` that prints nothing, or a literal `""`) are dropped from the

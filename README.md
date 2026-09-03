@@ -696,24 +696,6 @@ Anthropic-compatible APIs.
 
 #### OpenAI-Compatible APIs
 
-Here’s an example configuration for Deepseek, which uses an OpenAI-compatible
-API. Don't forget to set `DEEPSEEK_API_KEY` in your environment.
-
-```bash
-provider add deepseek --type openai-compat \
-  --base-url "https://api.deepseek.com/v1" \
-  --api-key "$DEEPSEEK_API_KEY"
-
-model add deepseek/deepseek-chat \
-  --name "Deepseek V3" \
-  --context-window 64000 \
-  --default-max-tokens 5000 \
-  --price-input 0.27 \
-  --price-output 1.1 \
-  --price-cache-create 1.1 \
-  --price-cache-hit 0.07
-```
-
 [aimlapi.com](https://aimlapi.com) is an OpenAI-compatible inference gateway
 that puts GPT, Claude, Gemini, DeepSeek, GLM and other catalog models behind
 one API key and one bill. Don't forget to set `AIMLAPI_API_KEY` in your
@@ -753,6 +735,24 @@ The four `--extra-header` lines are optional. They identify Crush as the
 calling application to aimlapi.com; `HTTP-Referer` and `X-Title` follow the
 same convention Crush already sends to OpenRouter and Vercel. Headers set on a
 provider are scoped to that provider, so they are never sent anywhere else.
+
+Here’s an example configuration for Deepseek, which uses an OpenAI-compatible
+API. Don't forget to set `DEEPSEEK_API_KEY` in your environment.
+
+```bash
+provider add deepseek --type openai-compat \
+  --base-url "https://api.deepseek.com/v1" \
+  --api-key "$DEEPSEEK_API_KEY"
+
+model add deepseek/deepseek-chat \
+  --name "Deepseek V3" \
+  --context-window 64000 \
+  --default-max-tokens 5000 \
+  --price-input 0.27 \
+  --price-output 1.1 \
+  --price-cache-create 1.1 \
+  --price-cache-hit 0.07
+```
 
 #### Anthropic-Compatible APIs
 
