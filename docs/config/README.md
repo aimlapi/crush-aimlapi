@@ -161,6 +161,31 @@ Flags:
       --provider-options JSON       merge a provider-specific JSON object
 ```
 
+[aimlapi.com](https://aimlapi.com) fronts several vendors' models (GPT, Claude,
+Gemini, DeepSeek, GLM and more) behind one OpenAI-compatible API and key:
+
+```bash
+provider add aimlapi \
+  --name "aimlapi.com" \
+  --type openai-compat \
+  --base-url "https://api.aimlapi.com/v1" \
+  --api-key "${AIMLAPI_API_KEY:?set AIMLAPI_API_KEY}" \
+  --extra-header HTTP-Referer "https://charm.land" \
+  --extra-header X-Title "Crush" \
+  --extra-header X-AIMLAPI-Source "agent/crush"
+
+model add aimlapi/openai/gpt-5.6-terra --name "GPT-5.6 Terra" \
+  --context-window 1050000 --default-max-tokens 128000
+```
+
+> The partner id is issued to the integration itself, not to people running it,
+> so the snippet above deliberately omits one. Copying somebody else's id would
+> file your traffic under their integration.
+
+The model id contains a slash of its own, so the reference is
+`aimlapi/<vendor>/<model>`. See the aimlapi.com
+[model catalog](https://aimlapi.com/models) for the full list of ids.
+
 ```bash
 provider add deepseek \
   --type openai-compat \
