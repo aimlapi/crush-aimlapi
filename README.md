@@ -707,7 +707,6 @@ provider add aimlapi --name "aimlapi.com" --type openai-compat \
   --api-key "$AIMLAPI_API_KEY" \
   --extra-header HTTP-Referer "https://charm.land" \
   --extra-header X-Title "Crush" \
-  --extra-header X-AIMLAPI-Partner-ID "part_crush" \
   --extra-header X-AIMLAPI-Source "agent/crush"
 
 model add aimlapi/openai/gpt-5.6-terra \
@@ -719,6 +718,10 @@ model add aimlapi/openai/gpt-5.6-terra \
   --price-input 2.6 \
   --price-output 15.6
 ```
+
+> The partner id is issued to the integration itself, not to people running it,
+> so the snippet above deliberately omits one. Copying somebody else's id would
+> file your traffic under their integration.
 
 Any other id from the aimlapi.com [model catalog](https://aimlapi.com/models)
 works the same way — `anthropic/claude-sonnet-5`, `google/gemini-3.8-flash`,
