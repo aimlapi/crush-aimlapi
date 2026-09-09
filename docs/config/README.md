@@ -172,12 +172,15 @@ provider add aimlapi \
   --api-key "${AIMLAPI_API_KEY:?set AIMLAPI_API_KEY}" \
   --extra-header HTTP-Referer "https://charm.land" \
   --extra-header X-Title "Crush" \
-  --extra-header X-AIMLAPI-Partner-ID "part_crush" \
   --extra-header X-AIMLAPI-Source "agent/crush"
 
 model add aimlapi/openai/gpt-5.6-terra --name "GPT-5.6 Terra" \
   --context-window 1050000 --default-max-tokens 128000
 ```
+
+> The partner id is issued to the integration itself, not to people running it,
+> so the snippet above deliberately omits one. Copying somebody else's id would
+> file your traffic under their integration.
 
 The model id contains a slash of its own, so the reference is
 `aimlapi/<vendor>/<model>`. See the aimlapi.com
